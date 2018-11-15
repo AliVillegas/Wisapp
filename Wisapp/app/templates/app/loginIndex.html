@@ -1,0 +1,51 @@
+{% extends 'app/base_template.html' %}
+
+{%block bodyContent%}
+<div class="wisapp-logo">Wisapp</div>
+{% if form.errors %}
+{% for field in form %}
+{% for error in field.errors %}
+<div class="alert alert-danger">
+    <strong>{{ error|escape }}</strong>
+</div>
+{% endfor %}
+{% endfor %}
+{% for error in form.non_field_errors %}
+<div class="alert alert-danger">
+    <strong>{{ error|escape }}</strong>
+</div>
+{% endfor %}
+{% endif %}
+<div class="login-page">
+    <div class="form">
+        {% if messages %}
+        <ul class="messages text-info text-left">
+            {% for message in messages %}
+            <li
+                    {% if message.tags %} class="{{ message.tags }}" {% endif %}>*{{ message }}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <form class="login-form" method="post">
+            {%csrf_token%}
+            {%for field in form%}
+            {{field.label_tag}}
+            {{form.media}}{{field}}
+            {%endfor%}
+            <button type="submit" id="submitButton" class="btn btn-success my-3">Iniciar Sesión</button>
+            <p class="message">¿No está registrado? <a href="{%url 'app:createNewAccount'%}">Crear Cuenta</a></p>
+        </form>
+    </div>
+</div>
+
+<script>
+    $('.message a').click(function () {
+        $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+    });
+    $("#id_password").change(function(){
+        $("#id_username").val($("#id_username").val().toLowerCase())
+    });
+</script>
+{%endblock%}

@@ -1,2 +1,2 @@
 # Wisapp
-Wisapp Web Red social
+Wisapp Web, Una Red social enfocada a las Personas Mayores
