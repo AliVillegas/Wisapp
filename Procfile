@@ -1,1 +1,1 @@
-"web: gunicorn wisapp.wsgi" 
+web: gunicorn locallibrary.wsgi --log-file -
